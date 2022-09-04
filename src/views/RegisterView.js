@@ -1,14 +1,15 @@
 import * as yup from 'yup';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { Helmet } from 'react-helmet';
-// import { authOperations } from '../redux/auth';
+// import { authOperations } from 'store/auth/auth-operations';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
+import { authOperations } from 'store/auth';
 
 export const RegisterView = () => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    // dispatch(authOperations.register(values));
+    dispatch(authOperations.register(values));
     resetForm();
   };
 

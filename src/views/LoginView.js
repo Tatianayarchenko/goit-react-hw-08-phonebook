@@ -1,13 +1,13 @@
 import { Formik, ErrorMessage, Form, Field } from 'formik';
 import * as yup from 'yup';
-// import { useDispatch } from 'react-redux';
-// import { authOperations } from 'redux/auth';
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'store/auth';
 
 export const LoginView = () => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    // dispatch(authOperations.logIn(values));
+    dispatch(authOperations.logIn(values));
     resetForm();
   };
 

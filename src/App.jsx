@@ -4,13 +4,14 @@ import SharedLayout from 'layout/SharedLayout';
 import { RegisterView } from 'views/RegisterView';
 import { LoginView } from 'views/LoginView';
 import { ContactsView } from 'views/ContactsView';
+import { HomeView } from 'views/HomeView';
 
 export const App = () => {
   return (
     <Container>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<div>Home page</div>} />
+          <Route index element={<HomeView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/contacts" element={<ContactsView />} />
