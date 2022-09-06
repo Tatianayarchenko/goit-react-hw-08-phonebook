@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'store/auth';
 
-export const LoginView = () => {
+const LoginView = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -45,3 +45,5 @@ export const LoginView = () => {
     </div>
   );
 };
+
+export default LoginView;

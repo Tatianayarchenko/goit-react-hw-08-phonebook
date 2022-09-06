@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { authOperations } from 'store/auth';
 
-export const RegisterView = () => {
+const RegisterView = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -58,3 +58,5 @@ export const RegisterView = () => {
     </div>
   );
 };
+
+export default RegisterView;

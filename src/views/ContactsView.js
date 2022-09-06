@@ -6,7 +6,7 @@ import { Container } from 'components/ui/Container.styled';
 // import { useDispatch } from 'react-redux';
 // import { contactsOperations } from 'store/contacts';
 
-export const ContactsView = () => {
+const ContactsView = () => {
   // const dispatch = useDispatch();
 
   // useEffect(() => dispatch(contactsOperations.get()), [dispatch]);
@@ -21,3 +21,5 @@ export const ContactsView = () => {
     </Container>
   );
 };
+
+export default ContactsView;

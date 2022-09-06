@@ -30,6 +30,12 @@ export const Contacts = () => {
     }
   };
 
+  // const getVisibleContacts = () => {
+  //     return contacts.filter(item =>
+  //    item.name.toLowerCase().includes(filter.toLowerCase())
+  //     );
+  // };
+
   const visibleContacts = getVisibleContacts();
 
   return (

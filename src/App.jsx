@@ -1,17 +1,18 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Suspense } from 'react';
 import { Container } from 'components/ui/Container.styled';
 import { Routes, Route } from 'react-router-dom';
-import SharedLayout from 'layout/SharedLayout';
-import { RegisterView } from 'views/RegisterView';
-import { LoginView } from 'views/LoginView';
-import { ContactsView } from 'views/ContactsView';
-import { HomeView } from 'views/HomeView';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { authOperations } from 'store/auth';
 import { GlobalStyle } from 'components/ui/GlobalStyle';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('views/HomeView'));
+const Login = lazy(() => import('views/LoginView'));
+const Contacts = lazy(() => import('views/ContactsView'));
+const Register = lazy(() => import('views/RegisterView'));
+const SharedLayout = lazy(() => import('layout/SharedLayout'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -22,14 +23,16 @@ export const App = () => {
 
   return (
     <Container>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomeView />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/contacts" element={<ContactsView />} />
-        </Route>
-      </Routes>
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/contacts" element={<Contacts />} />
+          </Route>
+        </Routes>
+      </Suspense>
       <ToastContainer autoClose={3000} theme="dark" />
       <GlobalStyle />
     </Container>
