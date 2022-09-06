@@ -26,9 +26,9 @@ const add = createAsyncThunk('contacts/add', async newContact => {
 
 const remove = createAsyncThunk('contacts/remove', async contactId => {
   try {
-    const contacts = await axios.delete(`/contacts/${contactId}`, contactId);
-    console.log('remove contacts ', contacts);
-    return contacts.data;
+    await axios.delete(`/contacts/${contactId}`, contactId);
+    console.log('remove contacts ', contactId);
+    return contactId;
   } catch (error) {
     toast.error('Something went wrong, please try again.');
   }

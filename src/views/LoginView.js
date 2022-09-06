@@ -2,6 +2,7 @@ import { Formik, ErrorMessage, Form, Field } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'store/auth';
+import { Helmet } from 'react-helmet';
 
 const LoginView = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,9 @@ const LoginView = () => {
 
   return (
     <div>
-      <h1>Login page</h1>
+      <Helmet>
+        <title>Login page</title>
+      </Helmet>
 
       <Formik
         initialValues={{

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
-// import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
 // import { authOperations } from 'store/auth/auth-operations';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { authOperations } from 'store/auth';
@@ -21,9 +21,9 @@ const RegisterView = () => {
 
   return (
     <div>
-      {/* <Helmet> */}
-      <h1>Registration page</h1>
-      {/* </Helmet> */}
+      <Helmet>
+        <title>Registration page</title>
+      </Helmet>
       <Formik
         initialValues={{
           name: '',

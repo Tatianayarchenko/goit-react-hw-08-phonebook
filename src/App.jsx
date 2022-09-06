@@ -1,59 +1,74 @@
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Container } from 'components/ui/Container.styled';
+// import { Container } from 'components/ui/Container.styled';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Suspense, useEffect } from 'react';
-import { authOperations } from 'store/auth';
-import { GlobalStyle } from 'components/ui/GlobalStyle';
-import { lazy } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Suspense, useEffect, lazy } from 'react';
+import { authOperations, authSelectors } from 'store/auth';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { GlobalStyle } from 'components/ui/GlobalStyle';
+import PrivatRoute from 'components/Routes/PrivatRoute';
+import PublicRoute from 'components/Routes/PublicRoute';
 
-const Home = lazy(() => import('views/HomeView'));
-const Login = lazy(() => import('views/LoginView'));
-const Contacts = lazy(() => import('views/ContactsView'));
-const Register = lazy(() => import('views/RegisterView'));
+const HomeView = lazy(() => import('views/HomeView'));
+const LoginView = lazy(() => import('views/LoginView'));
+const ContactsView = lazy(() => import('views/ContactsView'));
+const RegisterView = lazy(() => import('views/RegisterView'));
 const SharedLayout = lazy(() => import('layout/SharedLayout'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isRefreshingUser = useSelector(authSelectors.getIsRefreshingUser);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
   return (
-    <Container>
-      <Suspense>
-        <Routes>
-          <Route path="/" element={<SharedLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/contacts" element={<Contacts />} />
-          </Route>
-        </Routes>
-      </Suspense>
-      <ToastContainer autoClose={3000} theme="dark" />
-      <GlobalStyle />
-    </Container>
+    // <Container>
+    <>
+      {isRefreshingUser ? (
+        <h1>REFRESHING USER...</h1>
+      ) : (
+        <Suspense fallback={<p>Loading...</p>}>
+          <Routes>
+            <Route path="/" element={<SharedLayout />}>
+              <Route index element={<PublicRoute component={<HomeView />} />} />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute
+                    redirectTo="/contacts"
+                    restricted
+                    component={<RegisterView />}
+                  />
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute
+                    redirectTo="/contacts"
+                    restricted
+                    component={<LoginView />}
+                  />
+                }
+              />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivatRoute
+                    redirectTo="/login"
+                    component={<ContactsView />}
+                  />
+                }
+              />
+            </Route>
+          </Routes>
+        </Suspense>
+      )}
+    </>
+    /* <ToastContainer autoClose={3000} theme="dark" />
+      <GlobalStyle /> */
+    // </Container>
   );
 };
-
-//====================================================
-
-// import { ContactForm } from 'components/ContactForm';
-// import { Contacts } from 'components/Contacts';
-// import { Filter } from 'components/Filter';
-// import { Container } from 'components/ui/Container.styled';
-
-// export const App = () => {
-//   return (
-//     <Container>
-//       <h1>Phonebook</h1>
-//       <ContactForm />
-//       <h2>Contacts</h2>
-//       <Filter />
-//       <Contacts />
-//     </Container>
-//   );
-// };
