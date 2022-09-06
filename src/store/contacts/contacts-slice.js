@@ -20,8 +20,8 @@ const contactsSlice = createSlice({
     [contactsOperations.get.pending](state, _) {
       state.isLoading = true;
     },
-    [contactsOperations.get.fulfilled](state, { payload }) {
-      state.items = payload;
+    [contactsOperations.get.fulfilled](state, action) {
+      state.items = action.payload;
       state.isLoading = false;
     },
     [contactsOperations.get.rejected](state, _) {
@@ -30,8 +30,8 @@ const contactsSlice = createSlice({
     [contactsOperations.add.pending](state, _) {
       state.isLoading = true;
     },
-    [contactsOperations.add.fulfilled](state, { payload }) {
-      state.items.push(payload);
+    [contactsOperations.add.fulfilled](state, action) {
+      state.items.push(action.payload);
       state.isLoading = false;
     },
     [contactsOperations.add.rejected](state, _) {
@@ -40,8 +40,8 @@ const contactsSlice = createSlice({
     [contactsOperations.remove.pending](state, _) {
       state.isLoading = true;
     },
-    [contactsOperations.remove.fulfilled](state, { payload }) {
-      state.items = state.items.filter(item => item.id !== payload);
+    [contactsOperations.remove.fulfilled](state, action) {
+      state.items = state.items.filter(item => item.id !== action.payload);
       state.isLoading = false;
     },
     [contactsOperations.remove.rejected](state, _) {
