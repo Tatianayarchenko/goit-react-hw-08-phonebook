@@ -1,9 +1,10 @@
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { authOperations } from 'store/auth/auth-operations';
-import { Field, Form, Formik, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import { authOperations } from 'store/auth';
+import { FormContainer, InputForm } from 'components/ui/Form.styled';
+import { Button } from 'components/ui/Button.styled';
 
 const RegisterView = () => {
   const dispatch = useDispatch();
@@ -33,27 +34,27 @@ const RegisterView = () => {
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        <Form>
+        <FormContainer>
           <label htmlFor="name">
             Name
-            <Field type="text" name="name" />
+            <InputForm type="text" name="name" />
             <ErrorMessage name="name" component="p" />
           </label>
 
           <label>
             Email
-            <Field type="email" name="email" />
+            <InputForm type="email" name="email" />
             <ErrorMessage name="email" component="p" />
           </label>
 
           <label>
             Password
-            <Field type="password" name="password" />
+            <InputForm type="password" name="password" />
             <ErrorMessage name="password" component="p" />
           </label>
 
-          <button type="submit">Register</button>
-        </Form>
+          <Button type="submit">Register</Button>
+        </FormContainer>
       </Formik>
     </div>
   );

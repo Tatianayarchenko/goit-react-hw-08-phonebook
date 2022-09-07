@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyledLink } from './Header.styled';
-import { useSelector } from 'react-redux';
-import { authSelectors } from 'store/auth';
+import { useAuth } from 'hooks';
 
 export const MainNav = () => {
-  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const { isLoggedIn } = useAuth();
 
   return (
     <nav>
@@ -13,5 +12,3 @@ export const MainNav = () => {
     </nav>
   );
 };
-
-// export default Navigation;

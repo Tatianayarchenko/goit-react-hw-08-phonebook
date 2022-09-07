@@ -13,12 +13,10 @@ export const Span = styled.span`
 
 export const UserMenuButton = styled.button`
   cursor: pointer;
-  /* height: 25px; */
   border: none;
   border-radius: 5px;
   background-color: #15181a;
   color: #e99797;
   font-size: 16px;
   padding: 4px 8px;
-  /* width: 353px; */
 `;

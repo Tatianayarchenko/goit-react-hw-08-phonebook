@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid';
 import { Button } from '../ui/Button.styled';
-// import { InputForm } from '../ui/Input.styled';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsOperations } from 'store/contacts';
 import { getContacts } from 'store/contacts/contacts-selectors';
 import { FormContainer, InputForm } from './ContactForm.styled';
+import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -42,7 +42,7 @@ export const ContactForm = () => {
     };
     const normalizedName = contact.name.toLowerCase();
     contacts.find(contact => contact.name.toLowerCase() === normalizedName)
-      ? alert(`${name} is already in contacts`)
+      ? toast.error(`${name} is already in contacts`)
       : dispatch(contactsOperations.add({ id: nanoid(), name, number }));
   };
 

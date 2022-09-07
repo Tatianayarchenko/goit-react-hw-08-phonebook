@@ -1,12 +1,11 @@
 import { UserMenu } from 'components/UserMenu';
 import { AuthNav } from 'layout/AuthNav';
-import { useSelector } from 'react-redux';
 import { HeaderStyled, Navigation } from './Header.styled';
-import { authSelectors } from 'store/auth';
 import { MainNav } from './MainNav';
+import { useAuth } from 'hooks';
 
 export const Header = () => {
-  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const { isLoggedIn } = useAuth();
 
   return (
     <>

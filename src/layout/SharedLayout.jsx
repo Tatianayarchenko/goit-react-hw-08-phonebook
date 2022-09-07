@@ -1,5 +1,4 @@
 import { Header } from 'layout/Header/Header';
-// import { Container } from './SharedLayout.styled';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

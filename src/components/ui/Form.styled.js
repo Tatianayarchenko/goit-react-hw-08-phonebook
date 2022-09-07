@@ -10,6 +10,7 @@ export const FormContainer = styled(Form)`
   border-radius: 5px;
   width: 400px;
   padding: 20px;
+  margin-top: 150px;
 `;
 
 export const InputForm = styled(Field)`

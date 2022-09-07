@@ -5,12 +5,9 @@ import { getContacts, getFilterValue } from 'store/contacts/contacts-selectors';
 import { contactsOperations } from 'store/contacts';
 import { useEffect } from 'react';
 
-// import { removeContacts, getContsctsValue, getFilterValue } from 'store/slice';
-
 export const Contacts = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-
   const filter = useSelector(getFilterValue);
 
   useEffect(() => {
@@ -30,39 +27,21 @@ export const Contacts = () => {
     }
   };
 
-  // const getVisibleContacts = () => {
-  //     return contacts.filter(item =>
-  //    item.name.toLowerCase().includes(filter.toLowerCase())
-  //     );
-  // };
-
   const visibleContacts = getVisibleContacts();
 
   return (
     <ContactsList>
-      {/* {visibleContacts.lenght !== 0 &&
+      {contacts.length > 0 ? (
         visibleContacts.map(({ id, name, number }) => (
           <ContactsItem key={id}>
             <ContactsText>{name}</ContactsText>
             <ContactsText>{number}</ContactsText>
             <Button onClick={() => deleteContact(id)}>Delete</Button>
           </ContactsItem>
-        ))} */}
-      {contacts &&
-        visibleContacts.map(({ id, name, number }) => (
-          <ContactsItem key={id}>
-            <ContactsText>{name}</ContactsText>
-            <ContactsText>{number}</ContactsText>
-            <Button onClick={() => deleteContact(id)}>Delete</Button>
-          </ContactsItem>
-        ))}
-      {/* {visibleContacts.map(({ id, name, number }) => (
-        <ContactsItem key={id}>
-          <ContactsText>{name}</ContactsText>
-          <ContactsText>{number}</ContactsText>
-          <Button onClick={() => deleteContact(id)}>Delete</Button>
-        </ContactsItem>
-      ))} */}
+        ))
+      ) : (
+        <p>Your phonebook is empty, please add some contacts.</p>
+      )}
     </ContactsList>
   );
 };
