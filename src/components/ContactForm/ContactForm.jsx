@@ -7,6 +7,7 @@ import { contactsOperations } from 'store/contacts';
 import { getContacts } from 'store/contacts/contacts-selectors';
 import { FormContainer, InputForm } from './ContactForm.styled';
 import { toast } from 'react-toastify';
+import { InputPhone } from './InputPhone';
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -63,7 +64,7 @@ export const ContactForm = () => {
         </label>
         <label htmlFor="number">
           Number
-          <InputForm type="tel" name="number" required />
+          <InputPhone id="number" name="number" type="tel" />
           <ErrorMessage name="number" component="p" />
         </label>
         <Button type="submit">Add contact</Button>

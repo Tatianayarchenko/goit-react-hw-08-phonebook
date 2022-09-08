@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 export const ContactsList = styled.ul`
-  margin: 0 auto;
   list-style: none;
   padding: 20px;
   height: 300px;
   overflow-y: auto;
-  width: 400px;
   border: 1px solid;
   border-radius: 5px;
   background-color: #cec1df2e;

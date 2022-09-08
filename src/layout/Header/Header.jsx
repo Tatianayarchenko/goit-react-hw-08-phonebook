@@ -1,4 +1,4 @@
-import { UserMenu } from 'components/UserMenu';
+import { UserMenu } from 'layout/UserMenu';
 import { AuthNav } from 'layout/AuthNav';
 import { HeaderStyled, Navigation } from './Header.styled';
 import { MainNav } from './MainNav';

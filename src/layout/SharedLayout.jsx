@@ -7,12 +7,14 @@ import { Container } from 'components/ui/Container.styled';
 
 const SharedLayout = () => {
   return (
-    <Container>
+    <>
       <Header />
-      <Outlet />
+      <Container>
+        <Outlet />
+      </Container>
       <ToastContainer autoClose={3000} theme="dark" />
       <GlobalStyle />
-    </Container>
+    </>
   );
 };
 

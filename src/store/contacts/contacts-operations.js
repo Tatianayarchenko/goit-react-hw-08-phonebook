@@ -1,22 +1,20 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+import * as contactsApi from 'api/contactsApi';
 
 const get = createAsyncThunk('contacts/get', async () => {
   try {
-    const contacts = await axios.get('/contacts');
-    return contacts.data;
+    const contacts = await contactsApi.fetchContacts();
+    return contacts;
   } catch (error) {
     toast.error('Something went wrong, please try again.');
   }
 });
-
 const add = createAsyncThunk('contacts/add', async newContact => {
   try {
-    const contacts = await axios.post('/contacts', newContact);
-    return contacts.data;
+    await contactsApi.addContact(newContact);
+    const contacts = await contactsApi.fetchContacts();
+    return contacts;
   } catch (error) {
     toast.error('Something went wrong, please try again.');
   }
@@ -24,10 +22,12 @@ const add = createAsyncThunk('contacts/add', async newContact => {
 
 const remove = createAsyncThunk('contacts/remove', async contactId => {
   try {
-    await axios.delete(`/contacts/${contactId}`, contactId);
-    return contactId;
+    await contactsApi.removeContact(contactId);
+    toast.success('Contact deleted successfully.');
+    const contacts = await contactsApi.fetchContacts();
+    return contacts;
   } catch (error) {
-    toast.error('This contact has been deleted, please reload the page.');
+    toast.error('Something went wrong, please try again.');
   }
 });
 
@@ -36,5 +36,4 @@ const operations = {
   add,
   remove,
 };
-
 export default operations;

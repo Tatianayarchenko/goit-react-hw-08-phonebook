@@ -1,21 +1,11 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { token } from 'api/authApi';
+import * as authApi from 'api/authApi';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
-
-const register = createAsyncThunk('auth/register', async credentials => {
+const register = createAsyncThunk('auth/register', async user => {
   try {
-    const { data } = await axios.post('/users/signup', credentials);
+    const data = await authApi.registerUser(user);
     token.set(data.token);
     return data;
   } catch (error) {
@@ -23,9 +13,9 @@ const register = createAsyncThunk('auth/register', async credentials => {
   }
 });
 
-const logIn = createAsyncThunk('auth/login', async credentials => {
+const logIn = createAsyncThunk('auth/login', async user => {
   try {
-    const { data } = await axios.post('/users/login', credentials);
+    const data = await authApi.logIn(user);
     token.set(data.token);
     return data;
   } catch (error) {
@@ -35,7 +25,7 @@ const logIn = createAsyncThunk('auth/login', async credentials => {
 
 const logOut = createAsyncThunk('auth/logout', async () => {
   try {
-    await axios.post('/users/logout');
+    await authApi.logOut();
     token.unset();
   } catch (error) {
     toast.error('Something went wrong, please try again.');
@@ -49,12 +39,13 @@ const fetchCurrentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
+      console.log('No token');
       return thunkAPI.rejectWithValue();
     }
 
     token.set(persistedToken);
     try {
-      const { data } = await axios.get('/users/current');
+      const data = await authApi.fetchCurrentUser();
       return data;
     } catch (error) {
       toast.error('Something went wrong, please try again.');

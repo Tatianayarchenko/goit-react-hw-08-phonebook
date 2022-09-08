@@ -2,13 +2,10 @@ import { Form, Field } from 'formik';
 import styled from 'styled-components';
 
 export const FormContainer = styled(Form)`
-  margin: 0 auto;
-  text-align: center;
   font-size: 18px;
   background-color: #cec1df2e;
   border: 1px solid;
   border-radius: 5px;
-  width: 400px;
   padding: 20px;
 `;
 

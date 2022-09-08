@@ -2,9 +2,10 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Suspense, useEffect, lazy } from 'react';
 import { authOperations } from 'store/auth';
-import PrivatRoute from 'components/Routes/PrivatRoute';
-import PublicRoute from 'components/Routes/PublicRoute';
+import PrivateRoute from 'hocs/PrivateRoute';
+import PublicRoute from 'hocs/PublicRoute';
 import { useAuth } from 'hooks';
+import { Loading } from 'components/Loader';
 
 const HomeView = lazy(() => import('views/HomeView'));
 const LoginView = lazy(() => import('views/LoginView'));
@@ -26,7 +27,7 @@ export const App = () => {
       {isRefreshing ? (
         <h1>REFRESHING USER...</h1>
       ) : (
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<PublicRoute component={<HomeView />} />} />
@@ -53,7 +54,7 @@ export const App = () => {
               <Route
                 path="/contacts"
                 element={
-                  <PrivatRoute
+                  <PrivateRoute
                     redirectTo="/login"
                     component={<ContactsView />}
                   />

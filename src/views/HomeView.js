@@ -8,14 +8,14 @@ const HomeImage = styled.img`
 
 const HomeView = () => {
   return (
-    <div>
+    <>
       <Helmet>
         <title>Phonebook</title>
       </Helmet>
       <HomeImage src={image} alt="contacts" />
       <h1>Phonebook</h1>
       <p>The aplication for your contacts</p>
-    </div>
+    </>
   );
 };
 
