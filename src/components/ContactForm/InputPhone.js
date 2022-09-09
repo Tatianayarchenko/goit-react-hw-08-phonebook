@@ -26,12 +26,19 @@ export const InputPhone = ({ ...props }) => {
           marginRight: 'auto',
         }}
         inputStyle={{
-          outline: '1px solid #e99797',
+          border: '1px solid #e99797',
           borderRadius: '5px',
           backgroundColor: '#cec1df2e',
           color: '#e99797',
           width: '300px',
           height: '20px',
+        }}
+        buttonStyle={{
+          backgroundColor: '#cec1df2e',
+          border: '1px solid #e99797',
+        }}
+        dropdownStyle={{
+          backgroundColor: '#15181a',
         }}
       />
       {meta.error && meta.touched && <ErrorMessage>{meta.error}</ErrorMessage>}

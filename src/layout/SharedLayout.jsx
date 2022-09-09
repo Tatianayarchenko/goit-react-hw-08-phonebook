@@ -1,8 +1,7 @@
-import { Header } from 'layout/Header/Header';
+import { Header } from 'layout/common/Header/Header';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { GlobalStyle } from 'components/ui/GlobalStyle';
 import { Container } from 'components/ui/Container.styled';
 
 const SharedLayout = () => {
@@ -13,7 +12,6 @@ const SharedLayout = () => {
         <Outlet />
       </Container>
       <ToastContainer autoClose={3000} theme="dark" />
-      <GlobalStyle />
     </>
   );
 };

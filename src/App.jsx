@@ -5,7 +5,7 @@ import { authOperations } from 'store/auth';
 import PrivateRoute from 'hocs/PrivateRoute';
 import PublicRoute from 'hocs/PublicRoute';
 import { useAuth } from 'hooks';
-import { Loading } from 'components/Loader';
+import { Loading } from 'components/ui/Loader';
 
 const HomeView = lazy(() => import('views/HomeView'));
 const LoginView = lazy(() => import('views/LoginView'));
@@ -25,9 +25,9 @@ export const App = () => {
   return (
     <>
       {isRefreshing ? (
-        <h1>REFRESHING USER...</h1>
+        <Loading />
       ) : (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<PublicRoute component={<HomeView />} />} />

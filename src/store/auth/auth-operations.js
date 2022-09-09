@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { token } from 'api/authApi';
-import * as authApi from 'api/authApi';
+import { token } from 'api/auth';
+import * as authApi from 'api/auth';
 
 const register = createAsyncThunk('auth/register', async user => {
   try {
