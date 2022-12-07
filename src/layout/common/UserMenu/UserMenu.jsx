@@ -10,7 +10,7 @@ export const UserMenu = () => {
 
   return (
     <UserMenuContainer>
-      <Span>You are logged in as {user.name}</Span>
+      <Span>You are logged in as {user?.name}</Span>
       <UserMenuButton
         type="button"
         onClick={() => dispatch(authOperations.logOut())}
